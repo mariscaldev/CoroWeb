@@ -1,14 +1,19 @@
-# Usa una imagen base con PHP, Composer, Node.js y npm
-FROM laravelsail/php83-composer-node
+# Imagen oficial de PHP con Composer y Node preinstalados (pública y mantenida)
+FROM richarvey/nginx-php-fpm:php8.2
 
-# Crea y usa el directorio de la app
+# Setea el working dir
 WORKDIR /var/www/html
 
 # Copia los archivos del proyecto
 COPY . .
 
-# Instala dependencias PHP y Node
+# Instala Composer si no viene incluido (opcional)
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
+# Instala dependencias
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
     npm install && \
     npm run build
 
