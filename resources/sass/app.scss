@@ -1,0 +1,9 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+// 🎨 Define tu color personalizado antes de importar bootstrap
+$primary: #9AFCE6;
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
