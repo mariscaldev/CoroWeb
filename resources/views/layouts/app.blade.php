@@ -13,14 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    @if (app()->environment('local'))
-        {{-- Modo local: Vite Dev Server --}}
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    @else
-        {{-- Modo producción: Carga archivos ya compilados --}}
-        <link rel="stylesheet" href="{{ asset('build/assets/app-CyipM5MZ.css') }}">
-        <script src="{{ asset('build/assets/app-De4R3s3M.js') }}" defer></script>
-    @endif
+    @php
+        function vite_asset($asset)
+        {
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            return asset('build/' . $manifest[$asset]['file']);
+        }
+    @endphp
+
+    <link rel="stylesheet" href="{{ vite_asset('resources/sass/app.scss') }}">
+    <script src="{{ vite_asset('resources/js/app.js') }}" defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -166,7 +168,8 @@
                         <a href="{{ route('register') }}"><i class="bi bi-person-plus"></i> Register</a>
                     @endif
                 @else
-                    <div class="text-center text-white fw-bold mb-3">Hola, <span class="text-primary">{{ Auth::user()->name }}</span></div>
+                    <div class="text-center text-white fw-bold mb-3">Hola, <span
+                            class="text-primary">{{ Auth::user()->name }}</span></div>
                     <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active-link' : '' }} mb-3">
                         <i class="bi bi-house-door"></i> Inicio
                     </a>
