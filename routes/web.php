@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\{HomeController, CancionesController, ListasController, EtiquetasController};
+use App\Http\Controllers\{HomeController, CancionesController, ListasController, EtiquetasController, ApiController};
 
 Route::get('/', function () {
     return Auth::check() ? redirect('/home') : view('auth.login');
@@ -40,5 +40,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/lista-semanal/{id}', [ListasController::class, 'update'])->name('listas.update');
     Route::delete('/lista-semanal/{id}', [ListasController::class, 'destroy'])->name('listas.destroy');
     Route::patch('/lista-semanal/{id}/estado', [ListasController::class, 'toggleEstado'])->name('listas.estado');
-
 });
