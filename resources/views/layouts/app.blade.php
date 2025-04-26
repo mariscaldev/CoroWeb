@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('titulo', config('app.name', 'Laravel'))</title>
-
+    <title>@yield('titulo', config('app.name', 'CoroWeb By MariscalDev'))</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
