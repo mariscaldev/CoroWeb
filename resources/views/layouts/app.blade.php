@@ -13,7 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @if (app()->environment('local'))
+        {{-- Modo local: Vite Dev Server --}}
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @else
+        {{-- Modo producción: Carga archivos ya compilados --}}
+        <link rel="stylesheet" href="{{ asset('build/assets/app-CyipM5MZ.css') }}">
+        <script src="{{ asset('build/assets/app-De4R3s3M.js') }}" defer></script>
+    @endif
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
