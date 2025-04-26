@@ -13,7 +13,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @php
+        function vite_asset($path)
+        {
+            $manifestPath = public_path('build/manifest.json');
+
+            if (!file_exists($manifestPath)) {
+                return '';
+            }
+
+            $manifest = json_decode(file_get_contents($manifestPath), true);
+
+            return asset('build/' . ($manifest[$path]['file'] ?? ''));
+        }
+    @endphp
+
+    <link rel="stylesheet" href="{{ vite_asset('resources/sass/app.scss') }}">
+    <script src="{{ vite_asset('resources/js/app.js') }}" defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -159,7 +175,8 @@
                         <a href="{{ route('register') }}"><i class="bi bi-person-plus"></i> Register</a>
                     @endif
                 @else
-                    <div class="text-center text-white fw-bold mb-3">Hola, <span class="text-primary">{{ Auth::user()->name }}</span></div>
+                    <div class="text-center text-white fw-bold mb-3">Hola, <span
+                            class="text-primary">{{ Auth::user()->name }}</span></div>
                     <a href="{{ url('/home') }}" class="{{ request()->is('home') ? 'active-link' : '' }} mb-3">
                         <i class="bi bi-house-door"></i> Inicio
                     </a>
