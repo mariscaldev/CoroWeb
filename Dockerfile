@@ -29,4 +29,4 @@ COPY --from=build-stage /app /app
 EXPOSE 8000
 
 # Comando para iniciar Laravel en producción
-CMD php artisan config:cache && php -d variables_order=EGPCS -S 0.0.0.0:8000 public/index.php
+CMD php artisan config:cache && php -S 0.0.0.0:8000 server.php
