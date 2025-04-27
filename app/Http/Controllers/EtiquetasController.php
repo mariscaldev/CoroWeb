@@ -53,9 +53,11 @@ class EtiquetasController extends Controller
     }
     
     public function destroy($id) {
+        $id = decrypt($id); // DESENCRIPTAR primero
         $etiqueta = Etiquetas::findOrFail($id);
         $etiqueta->delete();
     
         return redirect()->route('etiquetas.index')->with('success', 'Etiqueta eliminada correctamente.');
     }
+    
 }
