@@ -8,7 +8,7 @@
 
         <div class="row">
             {{-- Gráfico de barras --}}
-            <div class="col-md-8">
+            <div class="col-md-8 mb-4">
                 <div class="card bg-dark text-white border-light mb-4" style="height: 100%;">
                     <div class="card-header">
                         <i class="bi bi-bar-chart-fill"></i> Canciones por Etiqueta
@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <div class="card bg-dark text-white border-light flex-fill">
+                <div class="card bg-dark text-white border-light flex-fill mb-4">
                     <div class="card-header">
                         <i class="bi bi-music-note-list"></i> Últimas 5 canciones agregadas
                     </div>
