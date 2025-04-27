@@ -3,6 +3,37 @@
 @section('titulo', 'Inicio')
 
 @section('content')
+    <style>
+        .list-group-item {
+            background-color: #111010;
+            color: white;
+            transition: color 0.3s, transform 0.1s;
+        }
+
+        .list-group-item i {
+            transition: color 0.3s;
+        }
+
+        .list-group-item a {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .list-group-item:hover {
+            color: #9AFCE6 !important;
+        }
+
+        .list-group-item:hover i,
+        .list-group-item:hover a {
+            color: #9AFCE6 !important;
+        }
+
+        .list-group-item:active {
+            transform: scale(0.97);
+            /* Efecto de presionado */
+        }
+    </style>
+
     <div class="container">
         <h1 class="mb-4">Panel de Control</h1>
 
