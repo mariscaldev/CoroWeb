@@ -26,7 +26,10 @@ RUN apt-get update && apt-get install -y libpq-dev unzip git && docker-php-ext-i
 # Copia todo el proyecto desde build-stage
 COPY --from=build-stage /app /app
 
+# ⬅️ ¡Esta línea es importante para exponer correctamente los assets!
+RUN mkdir -p /app/public/build && cp -r /app/public/build /app/public/
+
 EXPOSE 8000
 
-# Comando para iniciar Laravel en producción
-CMD php artisan config:cache && php -S 0.0.0.0:8000 server.php
+# Comando para iniciar Laravel en puerto público
+CMD php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000
