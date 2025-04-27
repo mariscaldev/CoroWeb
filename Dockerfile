@@ -28,5 +28,5 @@ COPY --from=build-stage /app /app
 
 EXPOSE 8000
 
-# Comando para iniciar Laravel en producción
-CMD php artisan config:cache && php -S 0.0.0.0:8000 server.php
+# Comando para iniciar Laravel en puerto público
+CMD php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000
