@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    public function canciones()
-    {
+    public function canciones() {
         $canciones = Canciones::all();
         return response()->json($canciones);
     }
 
-    public function cancion($id)
-    {
+    public function cancion($id) {
         $cancion = Canciones::find($id);
 
         if (!$cancion) {
@@ -27,6 +25,23 @@ class ApiController extends Controller
 
         return response()->json($cancion);
     }
+    public function multiplesCanciones($ids) {
+        // Separar los IDs que vienen separados por ~
+        $idsArray = explode('~', $ids);
+
+        // Buscar todas las canciones cuyo id esté en el array
+        $canciones = Canciones::whereIn('id', $idsArray)->get();
+
+        if ($canciones->isEmpty()) {
+            return response()->json([
+                'message' => 'No se encontraron canciones con los IDs proporcionados.',
+                'status' => 404
+            ], 404);
+        }
+
+        return response()->json($canciones);
+    }
+
 
     public function listas() {
         $listas = Listas::all(); // <<<<< sin with('canciones')
