@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+
 use App\Models\{Canciones, Etiquetas, Listas};
 use Illuminate\Http\Request;
 
