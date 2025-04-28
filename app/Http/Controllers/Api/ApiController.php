@@ -28,15 +28,13 @@ class ApiController extends Controller
         return response()->json($cancion);
     }
 
-    public function listas()
-    {
-        $listas = Listas::with('canciones')->get();
+    public function listas() {
+        $listas = Listas::all(); // <<<<< sin with('canciones')
         return response()->json($listas);
     }
 
-    public function lista($id)
-    {
-        $lista = Listas::with('canciones')->find($id);
+    public function lista($id) {
+        $lista = Listas::find($id);
 
         if (!$lista) {
             return response()->json([
@@ -47,4 +45,5 @@ class ApiController extends Controller
 
         return response()->json($lista);
     }
+
 }
