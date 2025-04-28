@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller; // <<<< Agrega esta línea
 use App\Models\{Canciones, Etiquetas, Listas};
 use Illuminate\Http\Request;
 

@@ -9,15 +9,15 @@ class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/home';
 
-    public function boot(): void
-    {
+    public function boot(): void {
         $this->routes(function () {
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::prefix('api')    // <<< ⚡
-                ->middleware('api') // <<< ⚡
-                ->group(base_path('routes/api.php'));
+            Route::prefix('api') // <<<<< Asegúrate que este prefix esté
+                ->middleware('api') // <<<<< Y que use el middleware 'api'
+                ->group(base_path('routes/api.php')); // <<<<< Que apunte bien a api.php
         });
     }
+
 }
