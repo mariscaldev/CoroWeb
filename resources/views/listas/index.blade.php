@@ -102,6 +102,19 @@
         </div>
     </div>
 
+    <!-- Modal "Actualizando estado..." -->
+    <div class="modal fade" id="modalActualizandoEstado" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+        data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-info">
+                <div class="modal-body text-center p-5">
+                    <div class="spinner-border text-info mb-3" role="status"></div>
+                    <h5>Actualizando estado...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let idEliminar = null;
@@ -163,6 +176,14 @@
                 const icono = this.querySelector('i');
                 const botonActual = this;
 
+                // Mostrar modal "Actualizando estado..."
+                const modalEstado = new bootstrap.Modal(document.getElementById(
+                'modalActualizandoEstado'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modalEstado.show();
+
                 fetch(`/lista-semanal/${id}/estado`, {
                         method: 'PATCH',
                         headers: {
@@ -181,6 +202,9 @@
                     })
                     .catch(error => {
                         console.error('Error al cambiar estado:', error);
+                    })
+                    .finally(() => {
+                        modalEstado.hide();
                     });
             });
         });
